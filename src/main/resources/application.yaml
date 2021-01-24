@@ -12,4 +12,15 @@ feign:
       default:
         connectTimeout: 5000
         readTimeout: 5000
-        loggerLevel: basic
+        loggerLevel: full
+#        loggerLevel: basic
+logging:
+  level:
+    root: debug
+
+weather:
+  id: "3911bd7cee3868d7c68a6036b715280e"
+  url: "api.openweathermap.org/data/2.5/forecast"
+  #path: "data/2.5/forecast?lat={lat}&lon={lon}&appid={API key}"
+  #url: "localhost:8080/hello-world"
+  #path: "/hello-world"
