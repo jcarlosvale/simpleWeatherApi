@@ -1,14 +1,20 @@
 package com.cloudator.service.util;
 
+import com.cloudator.dto.ForecastAlertDTO;
 import com.cloudator.dto.LocationToMonitorItemDTO;
 
 import com.cloudator.dto.LocationToMonitorListDTO;
+import com.cloudator.dto.response.WeatherForecastItem;
+import com.cloudator.entity.ForecastAlert;
 import com.cloudator.entity.Location;
 import lombok.experimental.UtilityClass;
 
 
+import javax.validation.constraints.Max;
+import javax.validation.constraints.Min;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.stream.Collectors;
 
 @UtilityClass
 public class EntityMapper {
@@ -38,5 +44,40 @@ public class EntityMapper {
         ));
 
         return LocationToMonitorListDTO.builder().locationToMonitorItemDTOList(locationToMonitorItemDTOList).build();
+    }
+
+    public static List<ForecastAlert> convertToForecastAlertList(List<WeatherForecastItem> newForecastAlertList,
+                                                                 Double latitude,
+                                                                 Double longitude) {
+        return
+        newForecastAlertList
+                .stream()
+                .map(weatherForecastItem -> ForecastAlert
+                        .builder()
+                        .timestamp(weatherForecastItem.getTimestamp())
+                        .dateTimeAsText(weatherForecastItem.getDateInText())
+                        .maxTemp(weatherForecastItem.getMainWeatherForecast().getMaxTemp())
+                        .minTemp(weatherForecastItem.getMainWeatherForecast().getMinTemp())
+                        .location(
+                                Location
+                                        .builder()
+                                        .latitude(latitude)
+                                        .longitude(longitude)
+                                        .isMonitored(true)
+                                        .build())
+                        .build())
+                .collect(Collectors.toList());
+    }
+
+    public static ForecastAlertDTO convertToDTO(ForecastAlert forecastAlert) {
+        return ForecastAlertDTO
+                .builder()
+                .latitude(forecastAlert.getLocation().getLatitude())
+                .longitude(forecastAlert.getLocation().getLongitude())
+                .maxTemp(forecastAlert.getMaxTemp())
+                .minTemp(forecastAlert.getMinTemp())
+                .timestamp(forecastAlert.getTimestamp())
+                .dateTimeAsText(forecastAlert.getDateTimeAsText())
+                .build();
     }
 }

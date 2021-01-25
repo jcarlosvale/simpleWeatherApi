@@ -1,7 +1,6 @@
-package com.cloudator.dto.response;
+package com.cloudator.dto;
 
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
-import com.fasterxml.jackson.annotation.JsonProperty;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Data;
@@ -12,14 +11,11 @@ import lombok.NoArgsConstructor;
 @AllArgsConstructor
 @NoArgsConstructor
 @Builder
-public class WeatherForecastItem {
-
-    @JsonProperty("dt")
+public class ForecastAlertDTO {
+    private Double latitude;
+    private Double longitude;
+    private Double maxTemp;
+    private Double minTemp;
     private Long timestamp;
-
-    @JsonProperty("dt_txt")
-    private String dateInText;
-
-    @JsonProperty("main")
-    private MainWeatherForecast mainWeatherForecast;
+    private String dateTimeAsText;
 }

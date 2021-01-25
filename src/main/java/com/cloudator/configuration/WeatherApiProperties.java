@@ -9,4 +9,5 @@ public class WeatherApiProperties {
     private String url = " ";
     private String id = " ";
     private String absoluteFilePath= " ";
+    private String fixedDelayInMilli = "60000";
 }
