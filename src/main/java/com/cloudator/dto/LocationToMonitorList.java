@@ -7,16 +7,14 @@ import lombok.Builder;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 
+import java.util.List;
+
 @JsonIgnoreProperties(ignoreUnknown = true)
 @Data
 @AllArgsConstructor
 @NoArgsConstructor
 @Builder
-public class MainWeatherForecast {
-
-    @JsonProperty("temp_min")
-    private Double minTemp;
-
-    @JsonProperty("temp_max")
-    private Double maxTemp;
+public class LocationToMonitorList {
+    @JsonProperty("list")
+    List<LocationToMonitorItem> locationToMonitorItemList;
 }

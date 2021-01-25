@@ -1,8 +1,7 @@
 package com.cloudator.controller;
 
 import com.cloudator.configuration.WeatherApiProperties;
-import com.cloudator.dto.WeatherForecastItem;
-import com.cloudator.dto.WeatherResponse;
+import com.cloudator.dto.response.WeatherResponse;
 import com.cloudator.service.WeatherApiServiceProxy;
 import com.netflix.hystrix.contrib.javanica.annotation.HystrixCommand;
 import lombok.RequiredArgsConstructor;
@@ -20,7 +19,7 @@ public class WeatherApiController {
     private final WeatherApiProperties weatherApiProperties;
 
     @GetMapping(path = "forecast", produces = MediaType.APPLICATION_JSON_VALUE)
-//    @HystrixCommand(fallbackMethod = "fallbackHelloMethod")
+    @HystrixCommand(fallbackMethod = "fallbackHelloMethod")
     public WeatherResponse hello() {
         WeatherResponse response = weatherApiServiceProxy.forecastWeather(35D, 139D, weatherApiProperties.getId());
         log.info(response);

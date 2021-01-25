@@ -1,4 +1,4 @@
-package com.cloudator.dto;
+package com.cloudator.dto.response;
 
 import lombok.Builder;
 import lombok.Data;

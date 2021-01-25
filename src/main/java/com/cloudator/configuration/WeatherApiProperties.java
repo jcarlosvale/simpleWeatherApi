@@ -8,4 +8,5 @@ import org.springframework.boot.context.properties.ConfigurationProperties;
 public class WeatherApiProperties {
     private String url = " ";
     private String id = " ";
+    private String absoluteFilePath= " ";
 }
