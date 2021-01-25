@@ -14,7 +14,7 @@ import javax.validation.constraints.Min;
 @AllArgsConstructor
 @NoArgsConstructor
 @Builder
-public class LocationToMonitorItem {
+public class LocationToMonitorItemDTO {
     @Min(value = -90, message = "Latitude invalid value [-90,90]")
     @Max(value = 90, message = "Latitude invalid value [-90,90]")
     private Double latitude;

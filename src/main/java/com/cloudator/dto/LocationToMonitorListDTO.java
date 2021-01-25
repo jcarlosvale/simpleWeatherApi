@@ -14,7 +14,7 @@ import java.util.List;
 @AllArgsConstructor
 @NoArgsConstructor
 @Builder
-public class LocationToMonitorList {
+public class LocationToMonitorListDTO {
     @JsonProperty("list")
-    List<LocationToMonitorItem> locationToMonitorItemList;
+    List<LocationToMonitorItemDTO> locationToMonitorItemDTOList;
 }

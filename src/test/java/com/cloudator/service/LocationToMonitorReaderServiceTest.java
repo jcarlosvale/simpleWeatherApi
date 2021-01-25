@@ -1,7 +1,8 @@
 package com.cloudator.service;
 
 import com.cloudator.configuration.WeatherApiProperties;
-import com.cloudator.dto.LocationToMonitorItem;
+import com.cloudator.dto.LocationToMonitorItemDTO;
+import com.cloudator.dto.LocationToMonitorListDTO;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import org.junit.jupiter.api.Test;
 
@@ -19,9 +20,14 @@ class LocationToMonitorReaderServiceTest {
     @Test
     public void readJsonFileTest() throws URISyntaxException {
 
-        List<LocationToMonitorItem> expectedLocationsList = new ArrayList<>();
-        expectedLocationsList.add(LocationToMonitorItem.builder().latitude(10D).longitude(10D).minTemp(10.5).maxTemp(11D).build());
-        expectedLocationsList.add(LocationToMonitorItem.builder().latitude(20D).longitude(20D).minTemp(20.5).maxTemp(21D).build());
+        List<LocationToMonitorItemDTO> expectedLocationToMonitorItemDTOList = new ArrayList<>();
+        expectedLocationToMonitorItemDTOList.add(
+                LocationToMonitorItemDTO.builder().latitude(10D).longitude(10D).minTemp(10.5).maxTemp(11D).build());
+        expectedLocationToMonitorItemDTOList.add(
+                LocationToMonitorItemDTO.builder().latitude(20D).longitude(20D).minTemp(20.5).maxTemp(21D).build());
+
+        LocationToMonitorListDTO expectedLocationToMonitorListDTO =
+                LocationToMonitorListDTO.builder().locationToMonitorItemDTOList(expectedLocationToMonitorItemDTOList).build();
 
         String absoluteFilePath = getAbsolutePathFrom("json/locationsToMonitor.json");
         WeatherApiProperties weatherApiProperties = new WeatherApiProperties();
@@ -29,9 +35,9 @@ class LocationToMonitorReaderServiceTest {
         ObjectMapper objectMapper = new ObjectMapper();
         LocationToMonitorReaderService locationToMonitorReaderService =
                 new LocationToMonitorReaderService(weatherApiProperties, objectMapper);
-        List<LocationToMonitorItem> actualLocationsList = locationToMonitorReaderService.readLocations();
+        LocationToMonitorListDTO actualLocationsList = locationToMonitorReaderService.readLocations();
 
-        assertEquals(expectedLocationsList, actualLocationsList);
+        assertEquals(expectedLocationToMonitorListDTO, actualLocationsList);
     }
 
     private String getAbsolutePathFrom(String fullFileName) throws URISyntaxException {
