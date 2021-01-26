@@ -7,6 +7,8 @@ import lombok.Builder;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 
+import java.util.Map;
+
 @JsonIgnoreProperties(ignoreUnknown = true)
 @Data
 @AllArgsConstructor
@@ -20,6 +22,13 @@ public class WeatherForecastItem {
     @JsonProperty("dt_txt")
     private String dateInText;
 
+    private Double minTemp;
+
+    private Double maxTemp;
+
     @JsonProperty("main")
-    private MainWeatherForecast mainWeatherForecast;
+    private void unpackMainField(Map<String,Object> main) {
+        this.minTemp = (Double)main.get("temp_min");
+        this.maxTemp = (Double)main.get("temp_max");
+    }
 }

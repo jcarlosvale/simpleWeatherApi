@@ -8,7 +8,5 @@ import java.util.List;
 
 @Repository
 public interface ForecastAlertRepository extends CrudRepository<ForecastAlert, Long> {
-    //List<ForecastAlert> findAllByTimestampGreaterThanEqualAndOrderByTimestamp(long timestamp);
-
     List<ForecastAlert> findAllByTimestampGreaterThanEqualOrderByTimestamp(long timestamp);
 }

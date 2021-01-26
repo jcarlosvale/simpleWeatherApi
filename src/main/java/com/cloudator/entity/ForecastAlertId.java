@@ -12,9 +12,11 @@ import java.io.Serializable;
 @Builder
 @AllArgsConstructor
 @NoArgsConstructor
-public class LocationId implements Serializable {
+public class ForecastAlertId implements Serializable {
     @Id
     private Double latitude;
     @Id
     private Double longitude;
+    @Id
+    private Long timestamp;
 }

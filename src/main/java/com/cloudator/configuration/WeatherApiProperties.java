@@ -3,6 +3,9 @@ package com.cloudator.configuration;
 import lombok.Data;
 import org.springframework.boot.context.properties.ConfigurationProperties;
 
+/**
+ * Property file representing the Application.yaml
+ */
 @ConfigurationProperties("weather")
 @Data
 public class WeatherApiProperties {

@@ -7,6 +7,7 @@ import lombok.Builder;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 
+import javax.validation.Valid;
 import java.util.List;
 
 @JsonIgnoreProperties(ignoreUnknown = true)
@@ -14,7 +15,9 @@ import java.util.List;
 @AllArgsConstructor
 @NoArgsConstructor
 @Builder
-public class LocationToMonitorListDTO {
+public class MonitoredLocationListDTO {
+
+    @Valid
     @JsonProperty("list")
-    List<LocationToMonitorItemDTO> locationToMonitorItemDTOList;
+    private List<MonitoredLocationItemDTO> monitoredLocationItemDTOList;
 }

@@ -1,8 +1,15 @@
 package com.cloudator.entity;
 
-import lombok.*;
+import lombok.AllArgsConstructor;
+import lombok.Builder;
+import lombok.Data;
+import lombok.NoArgsConstructor;
 
-import javax.persistence.*;
+import javax.persistence.Entity;
+import javax.persistence.Id;
+import javax.persistence.IdClass;
+import javax.validation.constraints.Max;
+import javax.validation.constraints.Min;
 
 @Entity
 @Data
@@ -11,10 +18,17 @@ import javax.persistence.*;
 @NoArgsConstructor
 @IdClass(LocationId.class)
 public class Location {
+
     @Id
+    @Min(value = -90, message = "Latitude invalid value [-90,90]")
+    @Max(value = 90, message = "Latitude invalid value [-90,90]")
     private Double latitude;
+
     @Id
+    @Min(value = -180, message = "Longitude invalid value [-180,180]")
+    @Max(value = 180, message = "Latitude invalid value [-180,180]")
     private Double longitude;
+
     private Boolean isMonitored;
     private Double maxTemp;
     private Double minTemp;

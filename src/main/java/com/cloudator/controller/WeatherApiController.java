@@ -1,14 +1,9 @@
 package com.cloudator.controller;
 
-import com.cloudator.configuration.WeatherApiProperties;
 import com.cloudator.dto.ForecastAlertDTO;
-import com.cloudator.dto.LocationToMonitorListDTO;
-import com.cloudator.dto.response.WeatherResponse;
-import com.cloudator.entity.ForecastAlert;
+import com.cloudator.dto.MonitoredLocationListDTO;
 import com.cloudator.service.ForecastAlertService;
 import com.cloudator.service.LocationService;
-import com.cloudator.service.WeatherApiServiceProxy;
-import com.netflix.hystrix.contrib.javanica.annotation.HystrixCommand;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.log4j.Log4j2;
 import org.springframework.http.MediaType;
@@ -20,6 +15,14 @@ import org.springframework.web.bind.annotation.RestController;
 import java.time.LocalDateTime;
 import java.util.List;
 
+/**
+ * Main Controller with endpoints:
+ * - GET
+ *    a) forecast : retrieve all next alerts
+ *    b) getMonitoredLocations: list of monitored locations
+ * - PUT
+ *    a) loadLocations: reload the locations to be monitored using the JSON file configured in the application.yaml
+ */
 @RestController
 @RequiredArgsConstructor
 @Log4j2
@@ -35,14 +38,14 @@ public class WeatherApiController {
     }
 
     @GetMapping(path = "getMonitoredLocations", produces = MediaType.APPLICATION_JSON_VALUE)
-    public ResponseEntity<LocationToMonitorListDTO> getMonitoredLocations() {
-        LocationToMonitorListDTO locationToMonitorListDTO = locationService.retrieveMonitoredLocations();
-        return ResponseEntity.ok(locationToMonitorListDTO);
+    public ResponseEntity<MonitoredLocationListDTO> getMonitoredLocations() {
+        MonitoredLocationListDTO monitoredLocationListDTO = locationService.retrieveMonitoredLocations();
+        return ResponseEntity.ok(monitoredLocationListDTO);
     }
 
     @PutMapping(path = "loadLocations", produces = MediaType.APPLICATION_JSON_VALUE)
-    public ResponseEntity<LocationToMonitorListDTO> loadLocationsToMonitor() {
-        LocationToMonitorListDTO locationToMonitorListDTO = locationService.loadLocationsToMonitor();
-        return ResponseEntity.ok(locationToMonitorListDTO);
+    public ResponseEntity<MonitoredLocationListDTO> loadLocationsToMonitor() {
+        MonitoredLocationListDTO monitoredLocationListDTO = locationService.loadMonitoredLocations();
+        return ResponseEntity.ok(monitoredLocationListDTO);
     }
 }
