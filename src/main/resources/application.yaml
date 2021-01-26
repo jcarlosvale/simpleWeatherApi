@@ -14,6 +14,8 @@ spring:
     driver-class-name: org.h2.Driver
 
 feign:
+  hystrix:
+    enabled: true
   client:
     config:
       default:
@@ -27,6 +29,6 @@ logging:
 
 weather:
   id: "3911bd7cee3868d7c68a6036b715280e"
-  url: "api.openweathermap.org/data/2.5/forecast"
+  url: "api.openweathermap.com/data/2.5/forecast"
   absoluteFilePath: "C:\\Pessoal\\Projects\\weatherAPI\\src\\test\\resources\\json\\locationsToTest.json"
   fixedDelayInMilli: 30000

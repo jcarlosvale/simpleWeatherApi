@@ -8,7 +8,6 @@ import com.cloudator.dto.response.WeatherResponse;
 import com.cloudator.entity.ForecastAlert;
 import com.cloudator.repository.ForecastAlertRepository;
 import com.cloudator.service.util.EntityMapper;
-import com.netflix.hystrix.contrib.javanica.annotation.HystrixCommand;
 import lombok.NonNull;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.log4j.Log4j2;
@@ -82,19 +81,12 @@ public class ForecastAlertService {
         return  weatherForecastItem.getMaxTemp() >= maxTemp || weatherForecastItem.getMinTemp() <= minTemp;
     }
 
-    @HystrixCommand(fallbackMethod = "fallbackConsumeRestProvider")
     private WeatherResponse consumeRestProvider(MonitoredLocationItemDTO monitoredLocationDTO) {
         return
                 weatherApiServiceProxy.forecastWeather(
                         monitoredLocationDTO.getLatitude(),
                         monitoredLocationDTO.getLongitude(),
                         weatherApiProperties.getId());
-    }
-
-    private WeatherResponse fallbackConsumeRestProvider(Throwable e) {
-        log.error(e.getMessage());
-        log.error(e.getStackTrace());
-        return null;
     }
 
     public List<ForecastAlertDTO> retrieveForecastAlertFrom(LocalDateTime fromLocalDateTime) {
