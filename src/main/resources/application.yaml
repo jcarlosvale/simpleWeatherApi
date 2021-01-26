@@ -28,7 +28,7 @@ logging:
     root: debug
 
 weather:
-  id: "3911bd7cee3868d7c68a6036b715280e"
+  id:
   url: "api.openweathermap.org/data/2.5/forecast"
-  absoluteFilePath: "C:\\Pessoal\\Projects\\weatherAPI\\src\\test\\resources\\json\\locationsToTest.json"
+  absoluteFilePath:
   fixedDelayInMilli: 30000
