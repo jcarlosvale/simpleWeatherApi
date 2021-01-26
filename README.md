@@ -4,14 +4,14 @@ by João Carlos (https://www.linkedin.com/in/joaocarlosvale/)
 ## User Story
 As a user, I can check if temperature exceeds given limits in the next five days, so that I know how to dress
 
-##Functionality
+## Functionality
 * Read a list of locations and limit temperatures to monitor from a JSON file
 * Periodically request a weather forecast service
   1. using the https://openweathermap.org/api)
   2. The forecast checking frequency must be configurable in the application YAML file (milliseconds fixed delay)
 * Check if any temperature limit (in Kelvin) is exceeded in the next five days and store the results in a H2-database
 
-##Initial Setup:
+## Initial Setup:
 1. create a JSON file storing the locations to monitor, example:
 ````json
 { "list": [
@@ -47,7 +47,7 @@ weather:
   fixedDelayInMilli: 30000
 ```
 
-##Available endpoints
+## Available endpoints
 1. GET /getMonitoredLocations <br> 
    Responsible to list the current monitored locations and temperature limits.<br>
 ````json
