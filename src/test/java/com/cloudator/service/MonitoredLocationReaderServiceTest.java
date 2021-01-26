@@ -4,16 +4,17 @@ import com.cloudator.dto.MonitoredLocationItemDTO;
 import com.cloudator.dto.MonitoredLocationListDTO;
 import org.junit.jupiter.api.Test;
 
-import java.io.File;
 import java.net.URISyntaxException;
-import java.net.URL;
-import java.nio.file.Paths;
 import java.util.ArrayList;
 import java.util.List;
 
+import static com.cloudator.Util.getAbsolutePathFromResource;
 import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.junit.jupiter.api.Assertions.assertTrue;
 
 class MonitoredLocationReaderServiceTest {
+
+    private final MonitoredLocationReaderService monitoredLocationReaderService = new MonitoredLocationReaderService();
 
     @Test
     public void readJsonFileTest() throws URISyntaxException {
@@ -27,19 +28,30 @@ class MonitoredLocationReaderServiceTest {
         MonitoredLocationListDTO expectedMonitoredLocationListDTO =
                 MonitoredLocationListDTO.builder().monitoredLocationItemDTOList(expectedMonitoredLocationItemDTOList).build();
 
-        String absoluteFilePath = getAbsolutePathFrom("json/locationsToMonitor.json");
-        MonitoredLocationReaderService monitoredLocationReaderService =
-                new MonitoredLocationReaderService();
+        String absoluteFilePath = getAbsolutePathFromResource("json/locationsToMonitor.json");
+
         MonitoredLocationListDTO actualLocationsList = monitoredLocationReaderService.readMonitoredLocationsFromJsonFile(absoluteFilePath);
 
         assertEquals(expectedMonitoredLocationListDTO, actualLocationsList);
     }
 
-    private String getAbsolutePathFrom(String fullFileName) throws URISyntaxException {
-        URL url = this.getClass().getClassLoader().getResource(fullFileName);
-        assert url != null;
-        File file = Paths.get(url.toURI()).toFile();
-        return file.getAbsolutePath();
+    @Test
+    public void readInvalidJsonFileFormatTest() throws URISyntaxException {
+
+        String absoluteFilePath = getAbsolutePathFromResource("json/invalidFormat.json");
+
+        MonitoredLocationListDTO actualLocationsList = monitoredLocationReaderService.readMonitoredLocationsFromJsonFile(absoluteFilePath);
+
+        assertTrue(actualLocationsList.getMonitoredLocationItemDTOList().isEmpty());
     }
 
+    @Test
+    public void readInvalidPathJsonFileTest() {
+
+        String absoluteFilePath = "invalid path";
+
+        MonitoredLocationListDTO actualLocationsList = monitoredLocationReaderService.readMonitoredLocationsFromJsonFile(absoluteFilePath);
+
+        assertTrue(actualLocationsList.getMonitoredLocationItemDTOList().isEmpty());
+    }
 }

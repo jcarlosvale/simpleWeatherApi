@@ -3,10 +3,6 @@ server:
 spring:
   jpa:
     show-sql: true
-#http://localhost:8080/h2-console/
-  h2:
-    console:
-      enabled: true
   datasource:
     url: jdbc:h2:mem:testdb;
     username: sa
@@ -22,13 +18,13 @@ feign:
         connectTimeout: 5000
         readTimeout: 5000
         loggerLevel: full
-#        loggerLevel: basic
+
 logging:
   level:
     root: debug
 
 weather:
-  id: "3911bd7cee3868d7c68a6036b715280e"
-  url: "api.openweathermap.org/data/2.5/forecast"
-  absoluteFilePath: "C:\\Pessoal\\Projects\\weatherAPI\\src\\test\\resources\\json\\locationsToTest.json"
-  fixedDelayInMilli: 30000
+  id: "someID"
+  url: "someURL"
+  absoluteFilePath: "someFile"
+  fixedDelayInMilli: 3600000

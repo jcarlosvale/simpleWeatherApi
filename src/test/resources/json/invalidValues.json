@@ -1,0 +1,15 @@
+{ "list": [
+  {
+    "latitude": 91,
+    "longitude": 10,
+    "minTemp": 10.5,
+    "maxTemp": 11
+  },
+  {
+    "latitude": 20,
+    "longitude": 181,
+    "minTemp": 20.5,
+    "maxTemp": 21
+  }
+]
+}

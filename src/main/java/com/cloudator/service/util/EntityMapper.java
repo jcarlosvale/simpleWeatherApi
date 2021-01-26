@@ -7,10 +7,12 @@ import com.cloudator.entity.ForecastAlert;
 import com.cloudator.entity.Location;
 import lombok.experimental.UtilityClass;
 
+import javax.validation.Valid;
+
 @UtilityClass
 public class EntityMapper {
 
-    public static ForecastAlertDTO convertToDTO(ForecastAlert forecastAlert) {
+    public static ForecastAlertDTO convertToDTO(@Valid ForecastAlert forecastAlert) {
         return ForecastAlertDTO
                 .builder()
                 .latitude(forecastAlert.getLatitude())
@@ -22,7 +24,7 @@ public class EntityMapper {
                 .build();
     }
 
-    public static MonitoredLocationItemDTO convertToDTO(Location location) {
+    public static MonitoredLocationItemDTO convertToDTO(@Valid Location location) {
         return MonitoredLocationItemDTO
                 .builder()
                 .latitude(location.getLatitude())
@@ -32,7 +34,7 @@ public class EntityMapper {
                 .build();
     }
 
-    public static Location convertToEntity(MonitoredLocationItemDTO monitoredLocationItemDTO) {
+    public static Location convertToEntity(@Valid MonitoredLocationItemDTO monitoredLocationItemDTO) {
         return Location
                 .builder()
                 .latitude(monitoredLocationItemDTO.getLatitude())
